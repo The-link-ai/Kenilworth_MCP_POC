@@ -1,0 +1,5 @@
+beautifulsoup4
+sentence_splitter
+requests
+tqdm
+pyyaml
