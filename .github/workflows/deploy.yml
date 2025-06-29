@@ -15,13 +15,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install deps
+      - name: Install scraper deps
         run: pip install beautifulsoup4 sentence_splitter requests tqdm pyyaml
 
-      - name: Build corpus
+      - name: Build corpus  # ← runs your script
         run: python build_corpus.py
 
-      - name: Deploy to gh-pages
+      - name: Deploy to gh-pages  # ← publishes mcp-corpus/
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
