@@ -1,0 +1,30 @@
+name: Build & Deploy MCP Corpus
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install beautifulsoup4 sentence_splitter requests tqdm pyyaml
+
+      - name: Build corpus
+        run: python build_corpus.py
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./mcp-corpus
+          publish_branch: gh-pages
+          force_orphan: true
